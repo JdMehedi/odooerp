@@ -1,0 +1,9 @@
+<odoo>
+    <!--purchase main menu-->
+    <menuitem id="menu_for_purchase_request"
+              name="Purchase request"
+              action="purchase_request_action_view"
+              sequence="0"
+              groups="purchase_request.group_purchase_for_scm,purchase_request.group_purchase_for_admin,purchase_request.group_purchase_for_pm,purchase_request.group_purchase_for_coo"/>
+
+</odoo>

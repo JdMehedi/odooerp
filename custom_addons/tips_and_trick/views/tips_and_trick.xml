@@ -1,0 +1,47 @@
+<odoo>
+    <record model="ir.ui.view" id="tips_tricks_form_view">
+        <field name="name">Tips Information</field>
+        <field name="model">tips.tricks</field>
+        <field name="arch" type="xml">
+            <form string="Tips">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="number"/>
+                            <field name="float_no"/>
+                        </group>
+                        <group>
+                            <field name="document"/>
+                            <field name="true"/>
+                            <field name="image"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="date_time"/>
+                            <field name="yes_no"/>
+                        </group>
+                        <group>
+                            <field name="price"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_tips">
+        <field name="name">Tips</field>
+        <field name="res_model">tips.tricks</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create Tricks Details</p>
+        </field>
+    </record>
+
+    <menuitem name="Tips and Tricks" id="tips_menu"/>
+    <!-- menu categories -->
+    <menuitem id="tips_exam_menu" parent="tips_menu" name="tips and tricks" sequence="10" action="action_tips"/>
+    <menuitem id="tips_exam_menu_2" parent="tips_menu" name="tips and tricks" sequence="20" action="action_tips"/>
+
+</odoo>

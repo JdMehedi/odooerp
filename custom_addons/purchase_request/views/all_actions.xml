@@ -1,0 +1,9 @@
+<odoo>
+    <!--    actions-->
+    <record id="purchase_request_action_view" model="ir.actions.act_window">
+        <field name="name">Purchase Request</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.request</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

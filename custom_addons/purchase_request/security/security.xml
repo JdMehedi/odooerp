@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <data>
+        <!--        group category for model-->
+        <record model="ir.module.category" id="category_purchase_request">
+            <field name="name">Purchase</field>
+        </record>
+        <record model="ir.module.category" id="category_pr_type">
+            <field name="name">PR Type</field>
+        </record>
+
+        <!--        group for model-->
+        <record model="res.groups" id="group_purchase_for_admin">
+            <field name="name">Admin</field>
+            <field name="category_id" ref="purchase_request.category_purchase_request"/>
+        </record>
+        <record model="res.groups" id="group_purchase_for_scm">
+            <field name="name">SCM</field>
+            <field name="category_id" ref="purchase_request.category_purchase_request"/>
+
+        </record>
+        <record model="res.groups" id="group_purchase_for_pm">
+            <field name="name">PM</field>
+            <field name="category_id" ref="purchase_request.category_purchase_request"/>
+        </record>
+        <record model="res.groups" id="group_purchase_for_coo">
+            <field name="name">COO</field>
+            <field name="category_id" ref="purchase_request.category_purchase_request"/>
+
+        </record>
+
+<!--        2nd group-->
+        <record model="res.groups" id="group_for_factory">
+            <field name="name">PR Factory</field>
+            <field name="category_id" ref="purchase_request.category_pr_type"/>
+        </record>
+        <record model="res.groups" id="group_for_it">
+            <field name="name">PR IT</field>
+            <field name="category_id" ref="purchase_request.category_pr_type"/>
+        </record>
+        <record model="res.groups" id="group_for_head">
+            <field name="name">PR Head</field>
+            <field name="category_id" ref="purchase_request.category_pr_type"/>
+        </record>
+
+        <!--        record rule-->
+        <record id="rule_for_factory" model="ir.rule">
+            <field name="name">See Factory PR</field>
+            <field name="model_id" ref="model_purchase_request"/>
+            <field name="domain_force">[('pr_type','=','factory')]</field>
+            <field name="groups" eval="[(4, ref('group_for_factory'))]"/>
+        </record>
+        <record id="rule_for_it" model="ir.rule">
+            <field name="name">See IT PR</field>
+            <field name="model_id" ref="model_purchase_request"/>
+            <field name="domain_force">[('pr_type','=','it')]</field>
+
+            <field name="groups" eval="[(4, ref('group_for_it'))]"/>
+        </record>
+        <record id="rule_for_head" model="ir.rule">
+            <field name="name">See Head PR</field>
+            <field name="model_id" ref="model_purchase_request"/>
+            <field name="domain_force">[('pr_type','=','head_office')]</field>
+
+            <field name="groups" eval="[(4, ref('group_for_head'))]"/>
+        </record>
+    </data>
+</odoo>

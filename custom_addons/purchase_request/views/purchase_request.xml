@@ -1,0 +1,117 @@
+<odoo>
+    <!--    general form view-->
+    <data>
+        <record model="ir.ui.view" id="purchase_request_form_view">
+            <field name="name">Purchase Request</field>
+            <field name="model">purchase.request</field>
+            <field name="arch" type="xml">
+                <form string="Purchase Requisition">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,scm,pm,approved"/>
+                        <button name="action_submit" string="submit" type="object" class="oe_highlight" states="draft"
+                                groups="purchase_request.group_purchase_for_admin,purchase_request.group_purchase_for_scm"/>
+                        <button name="action_hod_submit" string="submit" type="object" class="oe_highlight"
+                                states="scm"
+                                groups="purchase_request.group_purchase_for_admin,purchase_request.group_purchase_for_scm"/>
+<!--                        <button name="action_coo_submit" string="submit" type="object" class="oe_highlight"-->
+<!--                                states="pm"-->
+<!--                                groups="purchase_request.group_purchase_for_admin,purchase_request.group_purchase_for_scm"/>-->
+                        <button name="action_approved_submit" string="Approved" type="object" class="oe_highlight"
+                                states="pm"
+                                groups="purchase_request.group_purchase_for_admin,purchase_request.group_purchase_for_pm,purchase_request.group_purchase_for_coo"/>
+                        <button name="action_cancel" string="Cancel" type="object" class="btn-danger"
+                                states="draft,scm,pm"
+                                groups="purchase_request.group_purchase_for_admin,purchase_request.group_purchase_for_scm"/>
+                        <button name="action_pr_amendment" string="Amendment" type="object"
+                                groups="purchase_request.group_purchase_for_admin" class="btn-success"
+                                states="approved" confirm="Careful before amendment. Are you sure about this?"/>
+                        <button name="action_pr_close" string="Close" type="object" class="btn-danger"
+                                states="approved" groups="purchase_request.group_purchase_for_admin"/>
+
+                    </header>
+                    <sheet>
+                        <widget name="web_ribbon" title="Approved" bg_color="bg-success"
+                                attrs="{'invisible': [('state', '!=', 'approved')]}"/>
+                        <widget name="web_ribbon" title="Canceled" bg_color="bg-danger"
+                                attrs="{'invisible': [('state', '!=', 'canceled')]}"/>
+                        <widget name="web_ribbon" title="Closed" bg_color="bg-danger"
+                                attrs="{'invisible': [('state', '!=', 'closed')]}"/>
+                        <div class="oe_title">
+                            <h1>
+                                <label for="reference" string="Reference"/>
+                                <field name="reference"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="requisition_date"/>
+                                <field name="required_date"/>
+                                <field name="approved_date"/>
+                                <field name="company_id"/>
+                                <field name="department_id"/>
+                                <field name="budget_id"/>
+                            </group>
+
+                            <group>
+
+                                <field name="priority" required="1"/>
+                                <field name="requisition_type" required="1"/>
+                                <field name="pr_type" required="1"/>
+                                <field name="service"/>
+                                <field name="remarks"/>
+                                <!--                                <field name="is_rfq_allowed" />-->
+                            </group>
+                            <group>
+                                <field name="attachment" widget="many2many_binary"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="line_ids" string="Products">
+                                <tree editable="bottom">
+                                    <field name="line_ids">
+                                        <tree editable="bottom">
+                                            <field name="product_id"/>
+                                            <field name="product_code"/>
+                                            <field name="uom_id"/>
+                                            <field name="product_qty"/>
+                                            <field name="approved_qty"/>
+                                            <field name="stock_qty"/>
+                                            <field name="available_qty" optional="hide"/>
+                                        </tree>
+                                    </field>
+                                </tree>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!--        tree view-->
+        <record id="purchase_request_view" model="ir.ui.view">
+            <field name="name">Purchase Request</field>
+            <field name="model">purchase.request</field>
+            <field name="arch" type="xml">
+                <tree string="Purchase Requisition"
+                      decoration-danger="state == 'canceled'" decoration-success="state == 'approved'">
+                    <field name="name"/>
+                    <field name="requisition_date"/>
+                    <field name="create_uid"/>
+                    <field name="requisition_type"/>
+                    <field name="company_id"/>
+                    <field name="service"/>
+                    <field name="state"/>
+
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+

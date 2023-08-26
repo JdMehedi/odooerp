@@ -1,0 +1,34 @@
+<odoo>
+    <record model="ir.ui.view" id="inherited_form_view">
+        <field name="name">School Information</field>
+        <field name="model">school.student</field>
+        <field name="inherit_id" ref="shcool_informations.school_class_form_view"/>
+        <field name="arch" type="xml">
+<!--            <xpath expr="//field[@name='age']" position="after">-->
+<!--                <field name="mothers_name"/>-->
+<!--            </xpath>-->
+            <xpath expr="//field[@name='age']" position="attributes">
+                <attribute name="visible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='dob']" position="attributes">
+                <attribute name="visible">1</attribute>
+            </xpath>
+<!--            <xpath expr="//group[@name='group_2']" position="replace">-->
+<!--                <group>-->
+<!--                    <field name="mothers_name"/>-->
+<!--                </group>-->
+<!--            </xpath>-->
+        </field>
+    </record>
+
+<!--    <record model="ir.actions.act_window" id="inherited_school_form_view">-->
+<!--        <field name="name">inherited_school_form_view</field>-->
+<!--        <field name="target">new</field>-->
+<!--        <field name="res_model">school.student</field>-->
+<!--        <field name="view_mode">tree,form</field>-->
+<!--        <field name="help" type="html">-->
+<!--            <p class="o_view_nocontent_smiling_face">Create Tricks Details</p>-->
+<!--        </field>-->
+<!--    </record>-->
+
+</odoo>
